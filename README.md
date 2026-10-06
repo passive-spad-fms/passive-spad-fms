@@ -31,4 +31,4 @@ To serve it at `https://passive-spad-fms.github.io/` instead, rename the reposit
 
 ## Contact
 
-passive.spad.fms@gmail.com
+passive.spad.fms@gmail.com · tzofik@gmail.com
