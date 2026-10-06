@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Passive SPAD Foundation Models — Photons to Perception</title>
+  <meta name="description" content="Foundation models for single-photon avalanche diodes (SPADs). Computer vision directly from photons — in low light, at high speed, and across extreme dynamic range.">
+  <meta property="og:title" content="Passive SPAD Foundation Models">
+  <meta property="og:description" content="Photons in. Perception out. Vision foundation models for single-photon sensors.">
+  <meta name="theme-color" content="#07080d">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <canvas id="bg-photons" aria-hidden="true"></canvas>
+
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Passive SPAD Foundation Models, home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="3" y="3" width="26" height="26" rx="6" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5"/>
+        <circle cx="11" cy="11" r="2" fill="var(--photon)"/>
+        <circle cx="21" cy="13" r="1.4" fill="var(--photon)" opacity=".7"/>
+        <circle cx="14" cy="21" r="1.6" fill="var(--photon)" opacity=".85"/>
+        <circle cx="22" cy="22" r="1" fill="var(--photon)" opacity=".5"/>
+      </svg>
+      <span>Passive SPAD <em>FMs</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#insight">Insight</a>
+      <a href="#demo">Demo</a>
+      <a href="#extremes">Capabilities</a>
+      <a href="#applications">Applications</a>
+      <a class="btn btn-small" href="#contact">Get in touch</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> Foundation models for single-photon sensors</p>
+        <h1>Photons in.<br><span class="grad">Perception out.</span></h1>
+        <p class="lede">
+          Single-photon avalanche diodes (SPADs) see in the dark, at a hundred thousand frames per second,
+          across extreme dynamic range. We build foundation models that turn their raw photon streams
+          directly into understanding&nbsp;— skipping image reconstruction entirely.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">Partner with us</a>
+          <a class="btn btn-ghost" href="#demo">See it work &rarr;</a>
+        </div>
+        <dl class="hero-stats">
+          <div><dt>1</dt><dd>photon sensitivity</dd></div>
+          <div><dt>~100k</dt><dd>binary frames / sec</dd></div>
+          <div><dt>0</dt><dd>reconstruction steps</dd></div>
+        </dl>
+      </div>
+
+      <figure class="hero-sensor" aria-label="Animated simulation of a SPAD sensor's binary photon frames with objects detected directly from the photon stream">
+        <div class="sensor-chrome">
+          <span class="chip">SPAD&nbsp;ARRAY · LIVE SIM</span>
+          <span class="chip chip-mono" id="hero-fps">t = 0.00 ms</span>
+        </div>
+        <canvas id="hero-canvas" width="480" height="300"></canvas>
+        <figcaption>
+          <span><i class="legend-sq photon"></i>photon detections (1-bit)</span>
+          <span><i class="legend-sq box"></i>model output</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- INSIGHT -->
+    <section id="insight" class="section">
+      <div class="section-head">
+        <p class="kicker">01 · The key insight</p>
+        <h2>Don't rebuild the picture. <br>Understand the photons.</h2>
+        <p class="sub">
+          Today's pipelines force SPAD data back into the shape of a conventional image&nbsp;— averaging thousands
+          of binary frames, denoising, then handing the result to a vision model trained on ordinary photos.
+          That step throws away the very thing that makes SPADs special: time.
+        </p>
+      </div>
+
+      <div class="pipelines">
+        <div class="pipeline pipeline-old">
+          <div class="pipe-label">Conventional</div>
+          <ol class="pipe-steps">
+            <li><span class="step-ico">◌</span>Photons</li>
+            <li class="arrow" aria-hidden="true"></li>
+            <li class="costly"><span class="step-ico">▦</span>Accumulate<small>wait 1000s of frames</small></li>
+            <li class="arrow" aria-hidden="true"></li>
+            <li class="costly"><span class="step-ico">✦</span>Reconstruct<small>denoise · tone-map</small></li>
+            <li class="arrow" aria-hidden="true"></li>
+            <li><span class="step-ico">▣</span>RGB-style model</li>
+            <li class="arrow" aria-hidden="true"></li>
+            <li><span class="step-ico">◎</span>Perception</li>
+          </ol>
+          <p class="pipe-note">Latency, motion blur, and lost information baked in before the model ever sees the data.</p>
+        </div>
+
+        <div class="pipeline pipeline-new">
+          <div class="pipe-label">Passive SPAD FM</div>
+          <ol class="pipe-steps">
+            <li><span class="step-ico">◌</span>Photons</li>
+            <li class="arrow long" aria-hidden="true"><span class="flow"></span></li>
+            <li class="hero-step"><span class="step-ico">◆</span>SPAD Foundation Model<small>native to binary photon streams</small></li>
+            <li class="arrow long" aria-hidden="true"><span class="flow"></span></li>
+            <li><span class="step-ico">◎</span>Perception</li>
+          </ol>
+          <p class="pipe-note">One model, trained on the physics of photon arrival, outputs detections, depth, motion, and features directly.</p>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <article>
+          <h3>Native to the sensor</h3>
+          <p>Models consume sparse 1-bit frames and photon timing as-is, learning the Bernoulli statistics of photon arrival instead of fighting them.</p>
+        </article>
+        <article>
+          <h3>Foundation, not one-off</h3>
+          <p>Large-scale pretraining on simulated and real photon data yields general representations that adapt to detection, segmentation, tracking, and depth with little labelled data.</p>
+        </article>
+        <article>
+          <h3>Passive by design</h3>
+          <p>No lasers, no active illumination. Just ambient light&nbsp;— even starlight&nbsp;— so systems stay low-power, eye-safe, and covert.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section id="demo" class="section">
+      <div class="section-head">
+        <p class="kicker">02 · Interactive simulation</p>
+        <h2>What a SPAD actually sees</h2>
+        <p class="sub">
+          Each SPAD pixel answers one question per frame: <em>did a photon arrive?</em> Drag the sliders to change the
+          light level and how many binary frames are summed. Watch how quickly a reconstruction-first pipeline degrades
+          as light falls&nbsp;— and how much time it needs to collect enough photons.
+        </p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-controls">
+          <label class="ctrl">
+            <span class="ctrl-top"><span>Light level</span><output id="flux-out">0.10 photons/px/frame</output></span>
+            <input type="range" id="flux" min="-3" max="0.3" step="0.01" value="-1">
+            <span class="ctrl-scale"><span>starlight</span><span>overcast night</span><span>dusk</span></span>
+          </label>
+          <label class="ctrl">
+            <span class="ctrl-top"><span>Frames summed for reconstruction</span><output id="frames-out">64 frames · 0.64 ms</output></span>
+            <input type="range" id="frames" min="0" max="10" step="1" value="6">
+            <span class="ctrl-scale"><span>1</span><span>32</span><span>1024</span></span>
+          </label>
+          <button class="btn btn-ghost btn-small" id="demo-pause" type="button" aria-pressed="false">Pause</button>
+        </div>
+
+        <div class="demo-panels">
+          <figure class="panel">
+            <div class="panel-head"><span class="panel-num">A</span>Single binary frame <small>10 µs · 1 bit/pixel</small></div>
+            <canvas id="demo-binary" width="200" height="125"></canvas>
+            <figcaption>Raw sensor output. This is all the information a SPAD produces in one tick.</figcaption>
+          </figure>
+          <figure class="panel">
+            <div class="panel-head"><span class="panel-num">B</span>Reconstructed image <small id="recon-lat">0.64 ms window</small></div>
+            <canvas id="demo-recon" width="200" height="125"></canvas>
+            <figcaption>Summing frames reduces noise, but costs latency&nbsp;— and blurs anything that moves.</figcaption>
+          </figure>
+          <figure class="panel panel-accent">
+            <div class="panel-head"><span class="panel-num">C</span>Photon-native perception <small>short photon window</small></div>
+            <canvas id="demo-fm" width="200" height="125"></canvas>
+            <figcaption>A SPAD FM reasons over the photon stream itself, reporting what's in the scene as soon as evidence suffices.</figcaption>
+          </figure>
+        </div>
+        <div class="demo-readout" aria-live="polite">
+          <div><span class="ro-k">Photons / pixel in window</span><span class="ro-v" id="ro-photons">—</span></div>
+          <div><span class="ro-k">Reconstruction SNR</span><span class="ro-v" id="ro-snr">—</span></div>
+          <div><span class="ro-k">Reconstruction latency</span><span class="ro-v" id="ro-lat">—</span></div>
+        </div>
+        <p class="disclaimer">Illustrative simulation of Bernoulli photon detection on a synthetic night scene. Panel C visualizes the target behaviour of photon-native models; it is not output from a production model.</p>
+      </div>
+    </section>
+
+    <!-- EXTREMES -->
+    <section id="extremes" class="section">
+      <div class="section-head">
+        <p class="kicker">03 · Vision in extreme conditions</p>
+        <h2>Where conventional cameras give up</h2>
+        <p class="sub">Three regimes that break CMOS sensors&nbsp;— and where single-photon sensing, paired with the right models, shines.</p>
+      </div>
+
+      <div class="extremes">
+        <article class="extreme">
+          <div class="extreme-viz">
+            <canvas id="viz-lowlight" width="360" height="220" aria-label="Low light comparison: a conventional sensor's image lost in read noise versus a SPAD's clean photon counts"></canvas>
+            <div class="viz-tags"><span>CMOS</span><span class="hl">SPAD</span></div>
+          </div>
+          <h3><span class="tag">Low light</span>Every photon counts</h3>
+          <p>CMOS sensors add read noise to every pixel, every frame, burying faint signals. SPADs count individual photons with essentially zero read noise&nbsp;— the limiting factor becomes physics, not electronics.</p>
+        </article>
+
+        <article class="extreme">
+          <div class="extreme-viz">
+            <canvas id="viz-speed" width="360" height="220" aria-label="High speed comparison: a rotating fan blurred by a 33 ms conventional exposure versus sharp at microsecond SPAD frame rates"></canvas>
+            <div class="viz-tags"><span>33 ms exposure</span><span class="hl">160 µs of photons</span></div>
+          </div>
+          <h3><span class="tag">High speed</span>Freeze motion at 100k fps</h3>
+          <p>Binary frames arrive every few microseconds. Models choose their own temporal window&nbsp;— short for fast motion, long for static scenes&nbsp;— eliminating motion blur by construction.</p>
+        </article>
+
+        <article class="extreme">
+          <div class="extreme-viz chart-wrap">
+            <div class="chart-legend" aria-hidden="true">
+              <span><i class="sw sw-spad"></i>SPAD</span>
+              <span><i class="sw sw-cmos"></i>Conventional</span>
+            </div>
+            <svg id="viz-hdr" viewBox="0 0 360 220" role="img" aria-labelledby="hdr-title hdr-desc">
+              <title id="hdr-title">Sensor response versus light intensity</title>
+              <desc id="hdr-desc">A conventional sensor's response climbs linearly then clips flat at full-well capacity. A SPAD's response follows a soft 1 minus e to the minus x curve, staying informative across several more decades of brightness.</desc>
+            </svg>
+            <div class="chart-tip" id="hdr-tip" hidden></div>
+          </div>
+          <h3><span class="tag">High dynamic range</span>No hard clipping</h3>
+          <p>Conventional pixels saturate abruptly at full-well capacity. A SPAD's response rolls off smoothly, so headlights, sun, and shadow stay measurable in the same frame&nbsp;— and a model can read them all.</p>
+          <details class="table-view">
+            <summary>View as table</summary>
+            <table id="hdr-table"><thead><tr><th>Relative intensity</th><th>SPAD response</th><th>Conventional response</th></tr></thead><tbody></tbody></table>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <!-- APPLICATIONS -->
+    <section id="applications" class="section">
+      <div class="section-head">
+        <p class="kicker">04 · Applications</p>
+        <h2>Perception for the hardest environments</h2>
+        <p class="sub">SPAD arrays are rapidly becoming cheaper and higher-resolution, thanks to their adoption in phones and automotive LiDAR. The missing piece is the software to see with them.</p>
+      </div>
+
+      <div class="apps">
+        <article class="app">
+          <div class="app-ico" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M8 30l4-10a4 4 0 0 1 3.7-2.6h16.6A4 4 0 0 1 36 20l4 10v8h-4v-3H12v3H8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="15" cy="30" r="2" fill="var(--photon)"/><circle cx="33" cy="30" r="2" fill="var(--photon)"/></svg>
+          </div>
+          <h3>Autonomous vehicles</h3>
+          <p>Pedestrian and obstacle detection on unlit roads, through oncoming headlights and out of tunnel glare&nbsp;— with microsecond reaction windows.</p>
+        </article>
+        <article class="app">
+          <div class="app-ico" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="36" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="36" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="36" cy="36" r="5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="18" y="18" width="12" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="2" fill="var(--photon)"/></svg>
+          </div>
+          <h3>Drones &amp; robotics</h3>
+          <p>Agile flight and manipulation that needs high-rate visual feedback, at dawn, dusk, indoors, or underground.</p>
+        </article>
+        <article class="app">
+          <div class="app-ico" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 6l14 6v10c0 9-6 16-14 20-8-4-14-11-14-20V12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="22" r="3" fill="var(--photon)"/></svg>
+          </div>
+          <h3>Defense &amp; security</h3>
+          <p>Passive night surveillance with no emitted light to give away position, and tracking of fast-moving objects.</p>
+        </article>
+        <article class="app">
+          <div class="app-ico" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 24h32M24 8c5 5 5 27 0 32M24 8c-5 5-5 27 0 32" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".6"/><circle cx="34" cy="14" r="2" fill="var(--photon)"/></svg>
+          </div>
+          <h3>Space &amp; astronomy</h3>
+          <p>Space-domain awareness, star tracking, and on-orbit inspection where photons are scarce and contrast is extreme.</p>
+        </article>
+        <article class="app">
+          <div class="app-ico" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M10 38V18l8 6V18l8 6V18l8 6V10h4v28z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="36" cy="16" r="2" fill="var(--photon)"/></svg>
+          </div>
+          <h3>Industrial inspection</h3>
+          <p>Inspecting high-speed production lines, rotating machinery, and welding or laser processes with extreme brightness.</p>
+        </article>
+        <article class="app">
+          <div class="app-ico" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 40s-14-8-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 11-14 19-14 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 24h6l2-4 4 8 2-4h6" fill="none" stroke="var(--photon)" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Life sciences &amp; medical</h3>
+          <p>Low-dose, low-phototoxicity imaging of living samples, and fast fluorescence dynamics.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="section approach">
+      <div class="section-head">
+        <p class="kicker">05 · How we build it</p>
+        <h2>A full stack for photon-native vision</h2>
+      </div>
+      <ol class="timeline">
+        <li>
+          <span class="tl-num">01</span>
+          <div>
+            <h3>Physics-accurate photon simulation</h3>
+            <p>We convert large video corpora into realistic SPAD streams, modelling photon arrival, dark counts, crosstalk, dead time, and sensor-specific quirks.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-num">02</span>
+          <div>
+            <h3>Large-scale pretraining</h3>
+            <p>Self-supervised objectives over sparse binary space-time volumes teach the model to aggregate evidence adaptively across photons, pixels, and time.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-num">03</span>
+          <div>
+            <h3>Real-sensor adaptation</h3>
+            <p>Fine-tuning on captured data from commercial and research SPAD arrays closes the simulation-to-reality gap.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-num">04</span>
+          <div>
+            <h3>Task heads &amp; edge deployment</h3>
+            <p>Lightweight heads for detection, segmentation, depth, optical flow, and tracking, optimized to run alongside the sensor.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="contact-card">
+        <canvas id="contact-canvas" aria-hidden="true"></canvas>
+        <div class="contact-inner">
+          <p class="kicker">Work with us</p>
+          <h2>Seeing in the dark, at the speed of light.</h2>
+          <p class="sub">We're an early-stage team partnering with sensor makers, OEMs, and research groups who need vision where cameras fail. Pilot programs, data partnerships, and early access are open now.</p>
+          <div class="contact-actions">
+            <a class="btn" href="mailto:passive.spad.fms@gmail.com?subject=Passive%20SPAD%20FMs%20%E2%80%94%20Interest">Email us</a>
+            <button class="btn btn-ghost copy-email" type="button" data-email="passive.spad.fms@gmail.com">
+              <span class="mono">passive.spad.fms@gmail.com</span><span class="copy-state">Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> Passive SPAD Foundation Models</span>
+    <span class="mono">photons → perception</span>
+  </footer>
+
+  <script src="assets/main.js" defer></script>
+</body>
+</html>
