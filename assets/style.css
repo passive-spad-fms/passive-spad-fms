@@ -41,7 +41,13 @@ a { color: inherit; }
   position: fixed; inset: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 0; opacity: .55;
 }
-main, .nav, .footer { position: relative; z-index: 1; }
+main, .nav, .founder { display: flex; flex-direction: column; gap: 4px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line-strong); }
+.founder-name { font: 600 18px/1.3 var(--font-display); letter-spacing: -.01em; }
+.founder-role { font: 500 12px/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--photon); }
+.founder-email { color: var(--text-2); font-size: 14px; text-decoration: none; margin-top: 2px; }
+.founder-email:hover { color: var(--text); text-decoration: underline; }
+
+.footer { position: relative; z-index: 1; }
 
 /* ---------- nav ---------- */
 .nav {
